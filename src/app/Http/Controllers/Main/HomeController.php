@@ -34,7 +34,7 @@ class HomeController extends Controller
                         ->get();
 
         // compute max number of page
-        $maxPg = ceil(Image::count() / 10);
+        $maxPg = ceil($images->count() / 10);
 
         return view('main/home', [
             'head' => 'Latest',

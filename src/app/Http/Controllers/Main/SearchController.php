@@ -30,7 +30,7 @@ class SearchController extends Controller
                             ->offset(($pg - 1) * 10)->limit(10)
                             ->get();
 
-            $maxPg = ceil(Image::where('caption', 'like', '%'.$tar.'%')->count() / 10);
+            $maxPg = ceil($images->count() / 10);
         } else {
             $images = null;
             $maxPg = 1;

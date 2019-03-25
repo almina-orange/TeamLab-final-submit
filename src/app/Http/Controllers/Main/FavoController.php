@@ -19,10 +19,6 @@ class FavoController extends Controller
      */
     public function index(Request $request)
     {
-        // get user info
-        $uid = $request->uid;
-        $user = User::where('id', $uid)->first();
-
         // pagination
         if (isset($request->pg)) {
             $pg = $request->pg;
@@ -34,13 +30,13 @@ class FavoController extends Controller
         $images = Like::select('public.images.id', 'public.images.image', 'public.images.caption', 'public.images.user_id', 'public.users.github_id')
                         ->join('public.images', 'public.likes.image_id', '=', 'public.images.id')
                         ->join('public.users', 'public.images.user_id', '=', 'public.users.id')
-                        ->where('public.likes.user_id', $uid)
+                        ->where('public.likes.user_id', auth()->user()->id)
                         ->orderBy('public.images.id', 'desc')
                         ->offset(($pg - 1) * 10)->limit(10)
                         ->get();
 
         // compute max number of page
-        $maxPg = ceil($posts / 10);
+        $maxPg = ceil($images->count() / 10);
 
         return view('main/favo', [
             'head' => 'Favorites',

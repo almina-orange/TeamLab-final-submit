@@ -78,7 +78,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
                                 <a class="dropdown-item" href="{{ url('/user?uid='.auth()->user()->id) }}">Profile</a>
-                                <a class="dropdown-item" href="{{ url('/favo?uid='.auth()->user()->id) }}">Favorite</a>
+                                <a class="dropdown-item" href="{{ url('/favo') }}">Favorite</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ url('/logout') }}">Logout</a>
                             </div>
