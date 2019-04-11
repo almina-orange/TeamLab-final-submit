@@ -35,7 +35,8 @@ class UserController extends Controller
                         ->get();
 
         // count posts, compute max number of page
-        $maxPg = ceil($images / 10);
+        $posts = $images->count();
+        $maxPg = ceil($posts / 10);
 
         // count all likes
         $likes = 0;
