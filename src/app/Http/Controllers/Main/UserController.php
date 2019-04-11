@@ -29,14 +29,16 @@ class UserController extends Controller
         }
 
         // get images which are posted by user
-        $images = Image::where("user_id", $uid)
-                        ->orderBy("id", "desc")
-                        ->offset(($pg - 1) * 10)->limit(10)
-                        ->get();
+        $all = Image::where("user_id", $uid);
+
+        // get only 10
+        $images = $all->orderBy("id", "desc")
+                    ->offset(($pg - 1) * 10)->limit(10)
+                    ->get();
 
         // count posts, compute max number of page
-        $posts = $images->count();
-        $maxPg = ceil($posts / 10);
+        $posts = $all->count();
+        $maxPg = ceil($all->count() / 10);
 
         // count all likes
         $likes = 0;

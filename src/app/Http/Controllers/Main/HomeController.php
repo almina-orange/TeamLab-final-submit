@@ -23,19 +23,13 @@ class HomeController extends Controller
             $pg = 1;
         }
 
-        // $images = Image::select('public.images.id', 'public.images.image', 'public.images.caption', 'public.images.user_id', 'public.users.github_id')
-        //                 ->join('public.users', 'public.images.user_id', '=', 'public.users.id')
-        //                 ->orderBy('public.images.id', 'desc')
-        //                 ->offset(($pg - 1) * 10)->limit(10)
-        //                 ->get();
-
         // get all images
         $images = Image::orderBy('id', 'desc')
                         ->offset(($pg - 1) * 10)->limit(10)
                         ->get();
 
         // compute max number of page
-        $maxPg = ceil($images->count() / 10);
+        $maxPg = ceil(Image::count() / 10);
 
         return view('main/home', [
             'head' => 'Latest',
